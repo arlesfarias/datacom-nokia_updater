@@ -7,3 +7,5 @@ venv
 *.sqlite3
 *.db
 README.md
+.dockerignore
+Dockerfile
