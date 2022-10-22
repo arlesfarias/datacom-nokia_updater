@@ -79,7 +79,8 @@ def create_user():
     if User.find_by_login(auth.current_user().username).is_admin:
         username = str(request.form.get("user_username"))
         password = str(request.form.get("user_password"))
-        user = User(username, password)
+        is_admin = bool(request.form.get("is_admin"))
+        user = User(username, password, is_admin)
         user.save_to_db()
         print(f"Usuário {auth.current_user().username}" +
               f"criou usuário {username}.")
