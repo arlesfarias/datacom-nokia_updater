@@ -8,10 +8,12 @@ from db import db
 from models.users import User
 from models.olt import Olt as OltModel
 
+DB_URL = environ.get('DATABASE_URL') or 'sqlite:///db.sqlite3'
 
 load_dotenv()
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 auth = HTTPBasicAuth()
