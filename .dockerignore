@@ -6,3 +6,4 @@ venv
 .tool-version
 *.sqlite3
 *.db
+README.md
