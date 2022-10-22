@@ -2,15 +2,14 @@ from os import environ
 from flask import Flask, render_template, request
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import check_password_hash
-from dotenv import load_dotenv
 from olt.olt import Olt
 from db import db
 from models.users import User
 from models.olt import Olt as OltModel
 
+ISP = environ.get('ISP') or 'Provedor'
 DB_URL = environ.get('DATABASE_URL') or 'sqlite:///db.sqlite3'
 
-load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
@@ -41,7 +40,7 @@ def index():
     olts = OltModel.find_all()
     print(
         f"Usuário {auth.current_user().username} logado.")
-    return render_template("index.html", isp=environ.get("ISP"), olts=olts)
+    return render_template("index.html", isp=ISP, olts=olts)
 
 
 @app.route("/upgrade", methods=["POST"])

@@ -3,6 +3,9 @@ from utils.crypto_tools import encrypt, decrypt, generate_salt
 from os import environ
 
 
+SECRET = environ.get('SECRET') or 'supersecretpassword'
+
+
 class Olt(db.Model):
 
     __tablename__ = 'olt'
@@ -34,12 +37,12 @@ class Olt(db.Model):
         return None
 
     def save_olt_to_db(self) -> None:
-        self.olt_pwd = encrypt(self.olt_pwd, environ.get('SECRET'), self.salt)
+        self.olt_pwd = encrypt(self.olt_pwd, SECRET, self.salt)
         db.session.add(self)
         db.session.commit()
 
     def get_password(self) -> str:
-        return decrypt(self.olt_pwd, environ.get('SECRET'), self.salt)
+        return decrypt(self.olt_pwd, SECRET, self.salt)
 
     @classmethod
     def find_all(self) -> list:
