@@ -1,0 +1,8 @@
+.vscode
+__pycache__
+venv
+.env.example
+.gitignore
+.tool-version
+*.sqlite3
+*.db
