@@ -21,7 +21,7 @@ auth = HTTPBasicAuth()
 @app.before_first_request
 def create_db():
     db.create_all()
-    if not User.find_by_login('admin'):
+    if not User.find_all_admins():
         admin = User('admin', 'admin', True)
         admin.save_to_db()
 

@@ -27,6 +27,10 @@ class User(db.Model):
         return None
 
     @classmethod
+    def find_all_admins(self) -> list:
+        return User.query.filter_by(is_admin=True).all()
+
+    @classmethod
     def find_all(self) -> list:
         return User.query.all()
 
