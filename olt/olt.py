@@ -38,3 +38,6 @@ class Olt:
         content = content.read().decode("utf-8")
         print(content)
         return cmd
+
+    def close(self):
+        self.ssh.close()

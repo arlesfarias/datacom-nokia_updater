@@ -59,6 +59,7 @@ def upgrade():
     if port is None or onu_id is None:
         return render_template("notfound.html", serial=serial)
     olt.upgrade_onu(port, onu_id)
+    olt.close()
     return render_template("upgrade.html", serial=serial, port=port,
                            onu_id=onu_id)
 
